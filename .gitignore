@@ -5,3 +5,6 @@
 
 # exclude exported place
 place.rbxlx
+
+# if place is open, exclude the lock file
+place.rbxlx.lock
