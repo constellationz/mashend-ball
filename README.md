@@ -30,8 +30,6 @@ By default, the file tree is organized as follows:
 
 Gamebuilder is designed to allow integration with other libraries. The Get loader can be modified to fit your needs.
 
-By default, the Get loader has these functionalities:
-
 | Get call | Search Location | Functionality |
 | - | - | - |
 | `Get "Module"` | `src/common/Modules`, `src/common/Libraries` | Loads modules from common modules and libraries |
@@ -79,7 +77,7 @@ By default, the Get loader has these functionalities:
 
 To include a Rojo tree from another folder, add the directory to `default.project.json` with `$path` set to the correct destination. In this example, Roact is included.
 
-`default.project.json:`
+*`default.project.json` has a space where external libraries should be added*
 
 ```json
 "ReplicatedStorage": {
@@ -95,8 +93,6 @@ To include a Rojo tree from another folder, add the directory to `default.projec
   }
 }
 ```
-
-*`default.project.json` has a space where external libraries should be added*
 
 ```lua
 -- ClientScript
