@@ -50,6 +50,7 @@ Gamebuilder is designed to allow integration with other libraries. The Get loade
 2. Remove this project's GitHub link.
 
     ```bash
+    cd <project name>
     git remote rm origin
     ```
 
