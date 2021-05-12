@@ -1,5 +1,5 @@
 # namatchi/gamebuilder
-A template for building Rojo projects. Designed for partial Rojo management.
+A template for building Rojo projects. Designed with both partial and full management in mind.
 
 ### Custom Loader
 
