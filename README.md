@@ -1,5 +1,5 @@
 # namatchi/gamebuilder
-An easy template for building Roblox games.
+A template for building Rojo projects. Designed for partial Rojo management.
 
 ### Custom Loader
 
@@ -11,32 +11,39 @@ local MyEvent = Get.Remote "MyEvent" -- Get the remote "MyEvent"
 local MyAsset = Get.Asset "Props/MyAsset" -- Load an asset from the "Props" folder
 ```
 
-### Straightforward Rojo tree
+### Straightforward Rojo structure
 
-By default, `namatchi/gamebuilder` organizes the file tree as follows:
+By default, the file tree is organized as follows:
 
-- ReplicatedFirst -> `src/first`
-- ReplicatedStorage -> `src/common`
-    - Assets -> `src/common/assets`
-    - Remotes -> `src/common/remotes`
-    - Modules -> `src/common/modules`
-- ServerScriptService -> `src/server`
-- StarterPlayerScripts -> `src/client`
-- StarterCharacterScripts ->`src/character`
+```
+src
+|_src/first (ReplicatedFirst)
+|_src/common (ReplicatedStorage)
+| |_Assets (ReplicatedStorage.Assets)
+| |_Remotes (ReplicatedStorage.Remotes)
+| |_Modules (ReplicatedStorage.Modules)
+| |_Get.lua
+|_src/server (ServerScriptService)
+| |_ServerModules (ServerScriptService.ServerModules)
+| |_ServerScript.server.lua
+|_src/client (StarterPlayer.StarterPlayerScripts)
+| |_ClientScript.client.lua
+|_src/character (StarterPlayer.StarterCharacterScripts)
+```
 
 ### Customizability
 
-
+Gamebuilder is designed to allow integration with other libraries. The Get loader can be changed to fit your games requirements.
 
 ## Get started
 
-1. Clone this respository to a game project folder.
+1. Clone this repository to a game project folder.
 
     ```bash
     git clone https://github.com/namatchi/gamebuilder <project name>
     ```
 
-2. Remove this project's github link.
+2. Remove this project's GitHub link.
 
     ```bash
     git remote rm origin
@@ -60,9 +67,70 @@ By default, `namatchi/gamebuilder` organizes the file tree as follows:
 
 7. Activate Rojo in studio and begin working!
 
-## Configure namatchi/gamebuilder to your needs
+## Configure to your needs
 
+### Add source from external library to the Rojo tree:
 
+To include a Rojo tree from another GitHub repository or folder, add that directory to `default.project.json` with `$path` pointing to the correct destination. In this example, Roact is included from a folder outside of the project directory.
+
+`default.project.json:`
+
+```json
+"ReplicatedStorage": {
+  "$className": "ReplicatedStorage",
+  "$path": "src/common",
+  "Libraries": {
+    "$className": "Folder",
+    ...
+    "Roact": {
+      "$path": "../roact/src"
+    }
+    ...
+  }
+}
+```
+
+*Note: default.project.json has spaces left for adding external libraries*
+
+`src/client/ClientScript.client.lua`
+
+```lua
+-- client/ClientScript.client.lua
+local Get = require(game:GetService("ReplicatedStorage"):WaitForChild("Get"))
+local Roact = Get "Roact" -- Roact is loaded as if require(Roact) was called.
+
+-- Modules can be used as normally.
+local element = Roact.createElement(...)
+```
+
+### Customizing the Get loader
+
+If you decide you want to add your own loader, that can be done by changing `Get.lua`.
+
+`Get.lua`
+
+```lua
+ListenFor("Remote", Remotes, AssertExistence) -- Get.Remote
+
+-- Use the built-in Get listener. Searches children in DogFolder.
+ListenFor("Dog", DogFolder, function (result, name)
+    assert(result ~= nil, "got no result for "..name)
+    return result
+end
+    
+-- Make a custom get function.
+function Get.MyWay(name)
+    return Folder:FindFirstChild(name)
+end
+```
+
+`ClientScript.client.lua`
+
+```lua
+local Get = require(game:GetService("ReplicatedStorage"):WaitForChild("Get"))
+local MyGet = Get.Dog "Perry"
+local MyGet2 = Get.MyWay "Something"
+```
 
 ## Attribution
 
