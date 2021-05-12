@@ -24,10 +24,12 @@ src
 | |_Remotes
 | |_Modules
 | |_Libraries
+| |
 | |_Get.lua
 |
 |_src/server (ServerScriptService)
 | |_ServerModules
+| |
 | |_ServerScript.server.lua
 |
 |_src/client (StarterPlayerScripts)
@@ -38,11 +40,11 @@ src
 
 ### Customizability
 
-Gamebuilder is designed to allow integration with other libraries. The Get loader can be changed to fit your needs.
+Gamebuilder is designed to allow integration with other libraries. The Get loader can be modified to fit your needs.
 
 ## Get started
 
-1. Clone this repository to a game project folder.
+1. Clone this repository to your project folder.
 
     ```bash
     git clone https://github.com/namatchi/gamebuilder <project name>
@@ -70,13 +72,13 @@ Gamebuilder is designed to allow integration with other libraries. The Get loade
     rojo serve
     ```
 
-7. Activate Rojo in studio and begin working!
+7. Activate Rojo in studio and begin coding!
 
 ## Configure to your needs
 
 ### Add source from external library to the Rojo tree:
 
-To include a Rojo tree from another GitHub repository or folder, add that directory to `default.project.json` with `$path` pointing to the correct destination. In this example, Roact is included from a folder outside of the project directory.
+To include a Rojo tree from another folder, add the directory to `default.project.json` with `$path` set to the correct destination. In this example, Roact is included.
 
 `default.project.json:`
 
@@ -86,21 +88,19 @@ To include a Rojo tree from another GitHub repository or folder, add that direct
   "$path": "src/common",
   "Libraries": {
     "$className": "Folder",
-    ...
+
     "Roact": {
       "$path": "../roact/src"
     }
-    ...
+
   }
 }
 ```
 
 *`default.project.json` has a space where external libraries should be added*
 
-`src/client/ClientScript.client.lua`
-
 ```lua
--- client/ClientScript.client.lua
+-- ClientScript
 local Get = require(game:GetService("ReplicatedStorage"):WaitForChild("Get"))
 local Roact = Get "Roact" -- Roact is loaded as if require(Roact) was called.
 
@@ -112,9 +112,8 @@ local element = Roact.createElement(...)
 
 The Get loader can be customized to add extra functionality.
 
-`Get.lua`
-
 ```lua
+-- Get
 ListenFor("Remote", Remotes, AssertExistence) -- Get.Remote
 
 -- Use the built-in Get listener. Searches children in DogFolder.
@@ -129,9 +128,8 @@ function Get.WithMyMethod(name)
 end
 ```
 
-`ClientScript.client.lua`
-
 ```lua
+-- ClientScript
 local Get = require(game:GetService("ReplicatedStorage"):WaitForChild("Get"))
 local MyGet = Get.Dog "Perry"
 local MyMethod = Get.WithMyMethod "Something"
