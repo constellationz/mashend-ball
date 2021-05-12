@@ -34,6 +34,14 @@
         "$className": "StarterCharacterScripts",
         "$path": "src/character"
       }
+    },
+    "Workspace": {
+      "$className": "Workspace",
+      "$path": "src/workspace"
+    },
+    "ServerStorage": {
+      "$className": "ServerStorage",
+      "$path": "src/storage"
     }
   }
 }
