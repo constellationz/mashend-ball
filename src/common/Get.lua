@@ -62,9 +62,6 @@ function Get.Module(name)
 end
 
 -- Add a Get call. Optionally process result before returning.
--- @param call
--- @param parent
--- @param[opt] process
 function ListenFor(call, parent, process)
 	Get[call] = function(name)
 		local result = GetInstance(parent, name)
