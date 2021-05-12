@@ -20,19 +20,20 @@ src
 |_src/first (ReplicatedFirst)
 |
 |_src/common (ReplicatedStorage)
-| |_Assets (ReplicatedStorage.Assets)
-| |_Remotes (ReplicatedStorage.Remotes)
-| |_Modules (ReplicatedStorage.Modules)
+| |_Assets
+| |_Remotes
+| |_Modules
+| |_Libraries
 | |_Get.lua
 |
 |_src/server (ServerScriptService)
-| |_ServerModules (ServerScriptService.ServerModules)
+| |_ServerModules
 | |_ServerScript.server.lua
 |
-|_src/client (StarterPlayer.StarterPlayerScripts)
+|_src/client (StarterPlayerScripts)
 | |_ClientScript.client.lua
 |
-|_src/character (StarterPlayer.StarterCharacterScripts)
+|_src/character (StarterCharacterScripts)
 ```
 
 ### Customizability
