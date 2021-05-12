@@ -75,11 +75,12 @@ ListenFor("Remote", Remotes, AssertExistence) -- Get.Remote
 
 -- Server scripts can use Get.Server (ServerScriptService.ServerModules)
 if RunService:IsServer() then
+	local ServerStorage = game:GetService("ServerStorage")
 	local ServerModules = game:GetService("ServerScriptService")
 		:FindFirstChild("ServerModules")
 
-	-- Loads server modules.
-	ListenFor("Server", ServerModules, LoadModule)
+	ListenFor("Server", ServerModules, LoadModule) -- Load server modules
+	ListenFor("ServerAsset", ServerStorage, LoadModule) -- Load server assets
 end
 
 -- When Get(...) is called, it is passed here.

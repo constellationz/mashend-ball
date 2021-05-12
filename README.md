@@ -6,41 +6,40 @@ A template for building Rojo projects. Designed for partial Rojo management.
 ```lua
 local Get = require(game:GetService("ReplicatedStorage"):WaitForChild("Get"))
 
-local MyModule = Get "MyModule" -- Load the module "MyModule"
-local MyEvent = Get.Remote "MyEvent" -- Get the remote "MyEvent"
-local MyAsset = Get.Asset "Props/MyAsset" -- Load an asset from the "Props" folder
+local Maps = Get.ServerAsset "Maps" -- Get maps from server storage
+local Crown = Get.Asset "Props/Crown" -- Get the crown asset from common storage
+local DataStore2 = Get "MyModule" -- Load DataStore2 from external repo
+local ForwardData = Get.Remote "ForwardData" -- Get a common remote
 ```
 
 ### Straightforward Rojo structure
 
 By default, the file tree is organized as follows:
 
-```
-src
-|_src/first (ReplicatedFirst)
-|
-|_src/common (ReplicatedStorage)
-| |_Assets
-| |_Remotes
-| |_Modules
-| |_Libraries
-| |
-| |_Get.lua
-|
-|_src/server (ServerScriptService)
-| |_ServerModules
-| |
-| |_ServerScript.server.lua
-|
-|_src/client (StarterPlayerScripts)
-| |_ClientScript.client.lua
-|
-|_src/character (StarterCharacterScripts)
-```
+| File tree | Roblox | Description |
+| - | - | - |
+| `src/client` | [StarterPlayerScripts](https://developer.roblox.com/en-us/api-reference/class/PlayerScripts) | Client-side scripts |
+| `src/server` | [ServerScriptService](https://developer.roblox.com/en-us/api-reference/class/ServerScriptService) | Server-side scripts |
+| `src/common` | [ReplicatedStorage](https://developer.roblox.com/en-us/api-reference/class/ReplicatedStorage) | Common modules, assets, and remotes |
+| `src/character` | [StarterCharacterScripts](https://developer.roblox.com/en-us/api-reference/class/StarterCharacterScripts) | Scripts placed in the character |
+| `src/first` | [ReplicatedFirst](https://developer.roblox.com/en-us/api-reference/class/ReplicatedFirst) | Scripts that the client should load first |
+| `src/storage` | [ServerStorage](https://developer.roblox.com/en-us/api-reference/class/ServerStorage) | Assets that the server can access |
+| `src/workspace` | [Workspace](https://developer.roblox.com/en-us/api-reference/class/Workspace) | Map models |
 
 ### Customizability
 
 Gamebuilder is designed to allow integration with other libraries. The Get loader can be modified to fit your needs.
+
+By default, the Get loader has these functionalities:
+
+| Get call | Search Location | Functionality |
+| - | - | - |
+| `Get "Module"` | `src/common/Modules`, `src/common/Libraries` | Loads modules from common modules and libraries |
+| `Get.Asset "Props/Asset"` | `src/common/Assets` | Gets assets from common storage |
+| `Get.ServerAsset "Asset"` | `src/storage` | Gets a server asset (Server only) |
+| `Get.Remote "Remote"` | `src/common/Remotes` | Gets a remote |
+| `Get.Server "ServerModule"` | `src/server/ServerModules` | Gets a server module. Useful for server-only functionality, such as data management |
+| `Get.MyMethod()` | Up to you! | Get can be configured in a way that suits your criteria |
 
 ## Get started
 
