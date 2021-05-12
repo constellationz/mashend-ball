@@ -92,4 +92,7 @@ function RawGet(_, moduleName)
 end
 setmetatable(Get, {__call = RawGet})
 
+-- Add custom methods here.
+-- ListenFor("WithMyMethod", Folder, AssertExistence)
+
 return Get

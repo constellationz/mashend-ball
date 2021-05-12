@@ -18,22 +18,26 @@ By default, the file tree is organized as follows:
 ```
 src
 |_src/first (ReplicatedFirst)
+|
 |_src/common (ReplicatedStorage)
 | |_Assets (ReplicatedStorage.Assets)
 | |_Remotes (ReplicatedStorage.Remotes)
 | |_Modules (ReplicatedStorage.Modules)
 | |_Get.lua
+|
 |_src/server (ServerScriptService)
 | |_ServerModules (ServerScriptService.ServerModules)
 | |_ServerScript.server.lua
+|
 |_src/client (StarterPlayer.StarterPlayerScripts)
 | |_ClientScript.client.lua
+|
 |_src/character (StarterPlayer.StarterCharacterScripts)
 ```
 
 ### Customizability
 
-Gamebuilder is designed to allow integration with other libraries. The Get loader can be changed to fit your games requirements.
+Gamebuilder is designed to allow integration with other libraries. The Get loader can be changed to fit your needs.
 
 ## Get started
 
@@ -90,7 +94,7 @@ To include a Rojo tree from another GitHub repository or folder, add that direct
 }
 ```
 
-*Note: default.project.json has spaces left for adding external libraries*
+*`default.project.json` has a space where external libraries should be added*
 
 `src/client/ClientScript.client.lua`
 
@@ -105,7 +109,7 @@ local element = Roact.createElement(...)
 
 ### Customizing the Get loader
 
-If you decide you want to add your own loader, that can be done by changing `Get.lua`.
+The Get loader can be customized to add extra functionality.
 
 `Get.lua`
 
@@ -119,7 +123,7 @@ ListenFor("Dog", DogFolder, function (result, name)
 end
     
 -- Make a custom get function.
-function Get.MyWay(name)
+function Get.WithMyMethod(name)
     return Folder:FindFirstChild(name)
 end
 ```
@@ -129,9 +133,9 @@ end
 ```lua
 local Get = require(game:GetService("ReplicatedStorage"):WaitForChild("Get"))
 local MyGet = Get.Dog "Perry"
-local MyGet2 = Get.MyWay "Something"
+local MyMethod = Get.WithMyMethod "Something"
 ```
 
 ## Attribution
 
-namatchi/gamebuilder is licensed under the MIT license.
+`namatchi/gamebuilder` is licensed under the MIT license.
