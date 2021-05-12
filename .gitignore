@@ -8,3 +8,9 @@ place.rbxlx
 
 # if place is open, exclude the lock file
 place.rbxlx.lock
+
+# exclude generated selene config
+roblox.toml
+
+# exclude luacheck config
+.luacheckrc
