@@ -21,6 +21,7 @@ function Equipped()
 		rig = Ball.CreateRig(ballPart)
 		rig:AddToCharacter(character)
 		rig:SetNetworkOwner(player)
+		rig:SetColor(character["Body Colors"].TorsoColor.Color)
 	end
 end
 

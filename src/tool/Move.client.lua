@@ -13,7 +13,7 @@ local Ball = require(tool:WaitForChild("Ball"))
 local rig
 local isBraking = true
 
--- mode modal UI
+-- mode modal UI as some sort of object
 function ModeModal()
 	local TweenService = game:GetService("TweenService")
 
@@ -63,9 +63,13 @@ function ModeModal()
 		container.Parent = parent
 	end
 	
+	function modal:SetAdornee(adornee)
+		container.Adornee = adornee
+	end
+
 	return modal
 end
-local modeModal = ModeModal()
+local modeModal = ModeModal() -- create object
 
 function Equipped()
 	-- make the rig and add our character
@@ -74,6 +78,7 @@ function Equipped()
 	rig:SetCameraSubject()
 
 	-- set modal parent
+	modeModal:SetAdornee(rig.part)
 	modeModal:SetParent(LocalPlayer.PlayerGui)
 end
 
@@ -87,12 +92,13 @@ function Unequipped()
 	rig:RemoveCharacter()
 	rig = nil
 
-	-- unset modal parent
+	-- unset modal properties
+	modeModal:SetAdornee(nil)
 	modeModal:SetParent(tool)
 end
 
 function Stepped()
-	if rig ~= nil and rig.humanoid ~= nil then
+	if rig ~= nil and rig.humanoid ~= nil and rig.humanoid.Health > 0 then
 		if rig.humanoid.MoveDirection.magnitude > 0.1 then
 			rig:Roll(rig.humanoid.MoveDirection)
 		elseif isBraking == true then

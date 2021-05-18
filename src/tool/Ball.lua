@@ -78,7 +78,7 @@ end
 function Ball:SetColor(color)
 	assert(color ~= nil, "Ball:SetColor missing argument 1: color")
 	self.part.Color = color
-	self.Trail.Color = ColorSequence.new(color, color)
+	self.trail.Color = ColorSequence.new(color, color)
 end
 
 function Ball:SetCameraSubject()
