@@ -2,46 +2,12 @@
   "name": "Project",
   "tree": {
     "$className": "DataModel",
-    "HttpService": {
-      "$className": "HttpService",
-      "$properties": {
-        "HttpEnabled": true
+    "StarterPack": {
+      "$className": "StarterPack", 
+      "mashend_ball": {
+        "$className": "Tool",
+        "$path": "src/tool"
       }
-    },
-    "ReplicatedFirst": {
-      "$className": "ReplicatedFirst",
-      "$path": "src/first"
-    },
-    "ReplicatedStorage": {
-      "$className": "ReplicatedStorage",
-      "$path": "src/common",
-      "Libraries": {
-        "$className": "Folder"
-
-      }
-    },
-    "ServerScriptService": {
-      "$className": "ServerScriptService",
-      "$path": "src/server"
-    },
-    "StarterPlayer": {
-      "$className": "StarterPlayer",
-      "StarterPlayerScripts": {
-        "$className": "StarterPlayerScripts",
-        "$path": "src/client"
-      },
-      "StarterCharacterScripts": {
-        "$className": "StarterCharacterScripts",
-        "$path": "src/character"
-      }
-    },
-    "Workspace": {
-      "$className": "Workspace",
-      "$path": "src/workspace"
-    },
-    "ServerStorage": {
-      "$className": "ServerStorage",
-      "$path": "src/storage"
     }
   }
 }

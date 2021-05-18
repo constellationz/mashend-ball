@@ -7,10 +7,11 @@
 place.rbxlx
 
 # if place is open, exclude the lock file
-place.rbxlx.lock
+*.rbxlx.lock
 
 # exclude generated selene config
 roblox.toml
+selene.toml
 
 # exclude luacheck config
 .luacheckrc
