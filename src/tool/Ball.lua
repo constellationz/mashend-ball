@@ -104,8 +104,10 @@ function Ball:AddCharacter(character)
 	self.character = character
 	self.humanoid = character:WaitForChild("Humanoid")
 	self.humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-	self.humanoidAttachment = self.humanoidRootPart
-		:WaitForChild("RootRigAttachment")
+	-- r15 and r6 have different attachment names
+	self.humanoidAttachment = 
+		self.humanoidRootPart:FindFirstChild("RootRigAttachment")
+		or self.humanoidRootPart:FindFirstChild("RootAttachment")
 
 	-- cancel velocity
 	self:CancelVelocity()
@@ -155,7 +157,11 @@ function Ball:RemoveCharacter()
 	self.humanoid = nil
 	self.humanoidRootPart = nil
 	self.humanoidRigAttachment = nil
-	self.weld:Destroy()
+
+	-- in case the ball wasn't made in time
+	if self.weld ~= nil then
+		self.weld:Destroy()
+	end
 
 	-- reset physics values
 	self._characterMass = 0
