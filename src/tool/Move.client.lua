@@ -12,6 +12,7 @@ local ballPart = tool:WaitForChild("Part")
 local Ball = require(tool:WaitForChild("Ball"))
 local rig
 local isBraking = true
+local AIR_POWER = 50
 
 -- mode modal UI as some sort of object
 function ModeModal()
@@ -97,10 +98,17 @@ function Unequipped()
 	modeModal:SetParent(tool)
 end
 
-function Stepped()
+function RenderStepped(delta)
 	if rig ~= nil and rig.humanoid ~= nil and rig.humanoid.Health > 0 then
 		if rig.humanoid.MoveDirection.magnitude > 0.1 then
+			-- roll ball
 			rig:Roll(rig.humanoid.MoveDirection)
+
+			-- strafe (in air)
+			if rig:IsInAir() == true then
+				rig:ApplyImpulse(rig.humanoid.MoveDirection * rig:GetMass() 
+					* AIR_POWER * delta)
+			end
 		elseif isBraking == true then
 			rig:Brake()
 		else
@@ -129,6 +137,6 @@ end
 
 tool.Equipped:connect(Equipped)
 tool.Unequipped:connect(Unequipped)
-RunService.RenderStepped:connect(Stepped)
+RunService.RenderStepped:connect(RenderStepped)
 UserInputService.InputBegan:connect(InputBegan)
 UserInputService.JumpRequest:connect(Jump)

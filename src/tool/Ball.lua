@@ -179,22 +179,30 @@ function Ball:RawRoll(torque)
 	self.torque.Torque = torque
 end
 
+-- Apply a force to the ball.
+function Ball:ApplyImpulse(force)
+	self.part:ApplyImpulse(force)
+end
+
 function Ball:Jump()
-	self.part:ApplyImpulse(self.up * self:GetMass() * self.jumpPower)
+	self:ApplyImpulse(self.up * self:GetMass() * self.jumpPower)
 end
 
 function Ball:IsInAir()
 	-- ignore water, ball, and character (if applicable)
 	local params = RaycastParams.new()
 	params.FilterType = Enum.RaycastFilterType.Blacklist
-	params.IgnoreWater = true
+	params.IgnoreWater = false
 	params.FilterDescendantsInstances = {
 		self.character,
 		self.part
 	}
 
+	-- look down
+	local downRay = -self.up * (self.part.Size.x/2 + 3)
+
 	-- get result
-	local result = workspace:Raycast(self.part.Position, -self.up * 6, params)
+	local result = workspace:Raycast(self.part.Position, downRay, params)
 	return result == nil
 end
 
