@@ -10,7 +10,7 @@ local defaultJumpPower = 50 -- like Humanoid (N/kg)
 
 -- constants
 local ZERO = Vector3.new(0, 0, 0)
-local TORQUE_COEFFICIENT = 1e3 -- Tuned for zippy movement (N*m/kg)
+local TORQUE_COEFFICIENT = 8e2 -- Tuned for zippy movement (N*m/kg)
 local DAMPEN_ROLLING_COEFFICIENT = 1e2 -- (N*m/kg/m/s)
 
 local Ball = {}

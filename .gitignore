@@ -1,13 +1,9 @@
-# exclude roblox data files
-*.rbxm
-*.rbxl
-*.rbxlx
+# exclude all lock files
+*.lock
 
-# exclude exported place
+# exclude place file
 place.rbxlx
-
-# if place is open, exclude the lock file
-*.rbxlx.lock
+place.rbxlx.lock
 
 # exclude generated selene config
 roblox.toml
