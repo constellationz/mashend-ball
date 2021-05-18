@@ -1,4 +1,4 @@
--- Copyright (c) 2021 Tyler (@Mashend2468)
+-- Copyright 2021 Tyler (@Mashend2468)
 -- https://github.com/namatchi/mashend-ball
 
 local RunService = game:GetService("RunService")
